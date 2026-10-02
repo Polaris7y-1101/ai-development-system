@@ -12,4 +12,4 @@ First public release of ai-development-system.
 - Docs: bilingual README, quick start, architecture, project-memory, state-drift, legion, safety, provider policy, obsidian integration
 - Adapters: hermes (VERIFIED), claude-code (VERIFIED), codex (DRAFT — protocol validated historically; local provider availability environment-specific)
 - Obsidian integration rules + pointer dashboard templates
-- Apache-2.0 license + NOTICE; .github local templates & CI workflow stubs (LOCALLY_VALIDATED / NOT_YET_GITHUB_EXECUTED)
+- Apache-2.0 license + NOTICE; .github local templates & CI workflows (GITHUB_VALIDATED: 3/3 PASS)

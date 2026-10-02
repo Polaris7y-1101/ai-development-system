@@ -1,5 +1,5 @@
 # name: Public boundary scan (T9 + drift/refs)
-# STATUS: LOCALLY_VALIDATED / NOT_YET_GITHUB_EXECUTED
+# STATUS: GITHUB_VALIDATED / CI_3_OF_3_PASS @ 326b035
 name: boundary-scan
 on: [push, pull_request]
 permissions:

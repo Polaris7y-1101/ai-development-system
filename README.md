@@ -122,7 +122,7 @@ Start from any preset (or none), define roles + `required_coverage`, and the sys
 ## 19. Current v0.1 Limitations
 
 - Adapter docs describe contracts; runtime-specific tooling beyond skills is not bundled
-- CI workflows are provided as GitHub Actions YAML but marked `LOCALLY_VALIDATED / NOT_YET_GITHUB_EXECUTED`
+- CI workflows validated on GitHub Actions: tests / boundary-scan / yaml-validation all PASS (see `.github/README.md`)
 - Codex adapter end-to-end run depends on a working provider configured by you
 
 ## 20. Roadmap
