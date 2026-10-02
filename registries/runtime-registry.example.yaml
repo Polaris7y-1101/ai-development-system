@@ -1,0 +1,89 @@
+# ============================================================
+# RUNTIME_REGISTRY — 北斗军团
+# 位置: <runtime-home>/legion/runtime-registry.yaml
+# 作用: Coding Runtime 抽象。Agent Persona 不决定 Runtime。
+# 规则: 只记逻辑信息 + 环境变量名；无 Key、无字面域名。
+# ============================================================
+# 四层解耦: Role ≠ Skill ≠ Runtime ≠ Model ≠ Provider
+
+version: 1
+kind: runtime_registry
+
+runtimes:
+  claude-code:
+    display: "Claude Code"
+    cli_cmd: claude
+    version_cmd: "claude --version"
+    config_file: "~/.claude/settings.json"
+    requires_pty: true
+    requires_git_repo: false
+    supports_subagents: true
+    prompt_flag: "-p"
+    permission_flag: "--permission-mode acceptEdits"
+    env_keys:                     # Runtime 期望读取的环境变量名（值由 Provider Router 注入）
+      base_url: ANTHROPIC_BASE_URL
+      api_key:  ANTHROPIC_API_KEY
+    strengths:
+      - 跨模块 / 前后端联动
+      - 大型代码理解 / 长上下文
+      - 复杂重构 / 架构落地
+    status: available
+
+  codex:
+    display: "Codex CLI"
+    cli_cmd: codex
+    version_cmd: "codex --version"
+    config_file: "~/.codex/config.toml"
+    auth_file: "~/.codex/auth.json"
+    requires_pty: true
+    requires_git_repo: true       # Codex 必须在 git 仓库内
+    supports_subagents: false
+    prompt_flag: "-p"
+    permission_flag: "--full-auto"
+    env_keys:
+      base_url: OPENAI_BASE_URL
+      api_key:  OPENAI_API_KEY
+    strengths:
+      - 明确小功能 / 单模块
+      - Bug 修复 / 补测试 / 局部重构
+      - 代码探索 / 独立 Review
+    status: available
+
+  hermes:
+    display: "Hermes"
+    category: hybrid-runtime        # 既有 entry 无此字段，此为 hermes 专有扩展：
+                                    # 以 Orchestration 为主要定位，工具能力满足时承担直接工程执行
+    cli_cmd: hermes                 # 宿主本机 CLI（已实测 hermes --version 可用）
+    version_cmd: "hermes --version"
+    config_file: "<runtime-home>/config.yaml"
+    requires_pty: false             # 宿主进程常驻，可 headless（gateway/cron），TUI 可选
+    requires_git_repo: false
+    supports_subagents: true        # 子代理机制可用性受版本限制，切换前按 ai-switch-protocol 核验
+    # Critical Separation（MIG-003）: Hermes != Orchestrator Role，Hermes != 天枢。
+    # 正确关系仅是 Runtime=hermes + Active Role=orchestrator；北斗默认 Hermes 承载天枢，
+    # 但禁止硬绑定 orchestrator = hermes；Custom Legion / 其他 Runtime 亦可承载 Orchestrator。
+    # Project Memory Rule: Project Memory belongs to Project/Repository。
+    # Hermes 不拥有 HERMES_PROJECT_STATE / HERMES_CURRENT_TASK / HERMES_MEMORY 等竞争事实源；
+    # Runtime 切换（Hermes ↔ Codex ↔ Claude Code）不产生新 Project Truth。
+    # 无 env_keys: Hermes 为宿主进程，模型/Provider 由自身配置内的 Router 决定，
+    # 不经外部环境变量注入第三方 API（Runtime != Model != Provider）。
+    strengths:                      # Primary：编排域核心能力（本机已验证）
+      - workflow invocation / skill loading
+      - multi-role orchestration（军团多角色调度）
+      - delegation / task & context coordination
+      - checkpoint / resume / handoff
+    conditional_capabilities:       # Conditional：取决于本机安装与工具可用性，启用前逐任务确认
+      - repository read / code read         # 本机已验证
+      - code editing（patch / write_file）  # 本机已验证
+      - Git inspection / Git mutation       # commit 级已验证；push 受仓库纪律约束
+      - shell / build execution / test execution  # 本机已验证
+      - local filesystem                    # 本机已验证
+      - browser / UI inspection             # unknown：本机未验证，使用前需实测
+    status: available
+
+# Runtime Switch != New Task / != New Worktree / != Role Change（Task Reality 要求除外）
+# 未来可插入其他 Runtime（此处仅占位，不新增配置）
+# 例: opencode / aider / goose — 由 coding-agent-router 按能力选择
+placeholder_runtimes: []
+
+# Runtime 选择由 coding-agent-router 负责；本表只描述能力与约束。

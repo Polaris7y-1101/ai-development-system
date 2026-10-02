@@ -1,0 +1,11 @@
+roles:
+  - {role_id: orchestrator, display_name: 天枢, responsibility: dispatch/audit/merge, disabled: false}
+  - {role_id: product,       display_name: 瑶光, responsibility: product validation, disabled: false}
+  - {role_id: architect,     display_name: 天璇, responsibility: design, disabled: false}
+  - {role_id: backend,       display_name: 天玑, responsibility: backend implementation, disabled: false}
+  - {role_id: frontend,      display_name: 天权, responsibility: frontend implementation, disabled: false}
+  - {role_id: qa,            display_name: 玉衡, responsibility: independent QA, disabled: false}
+  - {role_id: shipping,      display_name: 开阳, responsibility: release ops, disabled: false}
+  - {role_id: experience,    display_name: 辅星, responsibility: UX writing, disabled: false}
+  - {role_id: content,       display_name: 弼星, responsibility: content, disabled: false}
+required_coverage: [dispatch, design, implementation, review, qa, shipping]

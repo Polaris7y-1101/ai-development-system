@@ -1,0 +1,99 @@
+# ============================================================
+# ROLE_SKILL_MATRIX — 北斗军团
+# 位置: <runtime-home>/legion/role-skill-matrix.yaml
+# 作用: 角色 ↔ Skill 绑定。按角色加载，不全局堆叠。
+# 规则: 只引用已存在 Skill；缺失的标注 todo（不重复造）。
+# ============================================================
+
+version: 1
+kind: role_skill_matrix
+
+roles:
+
+  tianshu-orchestrator:
+    display: 天枢 (AI COO/CTO)
+    skills:
+      - requirement-to-task
+      - coding-agent-router
+      - relay-provider-router
+      - relay-health-check
+      - repo-reality-check
+      - git-worktree-manager
+      - handoff-state-sync
+      - security-secrets-gate
+      - agent-team-governance      # 伞技能（治理 + 映射）
+      - session-checkpoint         # 跨 AI 切出
+      - session-resume             # 跨 AI 切入
+
+  yaoguang-product-validation:
+    display: 瑶光 (Product Validation)
+    skills:
+      - requirement-to-task
+      - handoff-state-sync
+      - security-secrets-gate
+
+  tianxuan-architect:
+    display: 天璇 (Software Architect)
+    skills:
+      - repo-reality-check
+      - api-contract
+      - database-migration
+      - security-secrets-gate
+      - handoff-state-sync
+      - requesting-code-review     # code-review-gate 载体 — Final Independent Review 默认 Owner（MIG-001，前提未参与本 Task 实现）
+      # architecture / database-design / security-analysis 由上述技能的"设计"面覆盖
+      # （database-migration 含数据模型设计面；security-secrets-gate 含安全分析面）
+
+  tianji-backend:
+    display: 天玑 (Backend Engineer)
+    skills:
+      - backend-development
+      - api-contract
+      - database-migration
+      - test-driven-development
+      - security-secrets-gate
+      - handoff-state-sync
+
+  tianquan-frontend:
+    display: 天权 (Frontend Engineer)
+    skills:
+      - frontend-development
+      - api-contract
+      - test-driven-development
+      - security-secrets-gate
+      - handoff-state-sync
+
+  yuheng-qa:
+    display: 玉衡 (QA Engineer)
+    skills:
+      - test-driven-development      # test-gate 的验证面
+      - api-contract
+      - security-secrets-gate
+      - handoff-state-sync
+
+  kaiyang-shipping:
+    display: 开阳 (DevOps/Shipping)
+    skills:
+      - release-rollback
+      - relay-health-check
+      - security-secrets-gate
+      - handoff-state-sync
+
+  fuxing-experience:
+    display: 辅星 (UX Reviewer)
+    skills:
+      - handoff-state-sync
+
+  bixing-content:
+    display: 弼星 (Content)
+    skills:
+      - handoff-state-sync
+
+# ── 全角色通用 ──
+all_roles_minimum:
+  - security-secrets-gate
+  - session-resume        # 任何 AI 接手前必须跑（切入约束）
+
+# ── 未覆盖、待定（P2，不造空壳）──
+todo_skills: []     # 原列举的 architecture/database-design/security-analysis/test-gate/
+                    # bug-report/health-check/shipping 已被现有技能覆盖或合并

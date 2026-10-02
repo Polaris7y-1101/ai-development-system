@@ -1,0 +1,70 @@
+# ============================================================
+# MODEL_REGISTRY (public example) — logical model profiles
+# Personas reference logical tiers only; concrete provider/model
+# mapping lives in YOUR private runtime config. No brands, no keys.
+# ============================================================
+
+version: 1
+kind: model_registry
+
+# capability tags: coding / reasoning / vision / long_context / fast / cheap
+# cost_tier: low / mid / high        latency_tier: fast / mid / slow
+
+models:
+  - model_id: <daily-model>                 # routine orchestration & dispatch
+    logical_tier: L0_daily
+    provider: provider-a                    # generic placeholder — your choice
+    capabilities: [fast, cheap, reasoning]
+    context: 100_000
+    cost_tier: low
+    latency_tier: fast
+    coding: 1
+    reasoning: 2
+    vision: false
+    status: example
+    notes: "Fill with any cheap fast chat-capable model you have."
+
+  - model_id: <coding-model>                # standard coding tasks
+    logical_tier: L2_standard_coding
+    provider: provider-a
+    capabilities: [coding, reasoning, long_context]
+    context: 200_000
+    cost_tier: mid
+    latency_tier: mid
+    coding: 4
+    reasoning: 3
+    vision: false
+    status: example
+    notes: "Fill with a strong coding model."
+
+  - model_id: <high-stakes-model>           # high-stakes design / final review
+    logical_tier: L4_high_stakes
+    provider: provider-b
+    capabilities: [coding, reasoning, long_context]
+    context: 200_000
+    cost_tier: high
+    latency_tier: mid
+    coding: 5
+    reasoning: 5
+    vision: false
+    status: example
+    notes: "Fill with your strongest reasoning model; use sparingly."
+
+  - model_id: <vision-model>                # screenshots / image analysis
+    logical_tier: L1_vision
+    provider: official-provider
+    capabilities: [vision, reasoning]
+    context: 128_000
+    cost_tier: mid
+    latency_tier: mid
+    coding: 0
+    reasoning: 3
+    vision: true
+    status: example
+    notes: "Fill with any vision-capable model."
+
+# Rules:
+# - Personas NEVER hardcode brands/versions; they reference logical tiers.
+# - provider values here are placeholders from the public provider registry
+#   (provider-a / provider-b / official-provider / relay-provider / local-provider).
+# - Health/fallback/model_mapping are defined per-provider in the provider registry.

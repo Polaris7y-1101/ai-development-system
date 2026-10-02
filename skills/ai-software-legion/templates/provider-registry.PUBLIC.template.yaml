@@ -1,0 +1,65 @@
+# ============================================================
+# PROVIDER_REGISTRY — PUBLIC TEMPLATE (v0.1)
+# 位置: <runtime-home>/skills/ai-software-legion/templates/
+# 作用: Provider / Relay 抽象的【公开匿名模板】。
+#       与私有 <runtime-home>/legion/provider-registry.yaml 同构，
+#       但全部使用匿名标识，可安全分享/开源。
+# 规则:
+#   1. 禁止填写真实 Provider 名 / API Key / 字面 Base URL
+#   2. 只记逻辑信息 + 环境变量名（env 名制）
+#   3. 实际部署时复制到私有目录再替换 env 指向
+# ============================================================
+
+version: 1
+kind: provider_registry
+
+providers:
+
+  provider-a:                      # 例：主 relay
+    kind: relay
+    region: <region>
+    protocol: <anthropic|openai|other>
+    base_url_env: PROVIDER_A_BASE_URL
+    api_key_env: PROVIDER_A_API_KEY
+    health_env_hint: "GET /models"
+    status: active
+    capabilities: [chat, tools]
+    notes: "主用 relay。填 env 名，不填字面值。"
+
+  provider-b:                      # 例：备用 relay（failover）
+    kind: relay
+    protocol: <anthropic|openai|other>
+    base_url_env: PROVIDER_B_BASE_URL
+    api_key_env: PROVIDER_B_API_KEY
+    health_env_hint: "GET /models"
+    status: standby
+    capabilities: [chat, tools]
+    notes: "降级备用。failover 语义见 provider-error-handling.md。"
+
+  official-provider:               # 例：官方直连
+    kind: official
+    protocol: <anthropic|openai|other>
+    base_url_env: ''               # 官方端点可留空走 SDK 默认
+    api_key_env: OFFICIAL_PROVIDER_API_KEY
+    status: active
+    capabilities: [chat, tools, vision]
+    notes: "官方直连。额度/计费自理。"
+
+  relay-provider:                  # 例：第三 relay 占位
+    kind: relay
+    protocol: <anthropic|openai|other>
+    base_url_env: RELAY_PROVIDER_BASE_URL
+    api_key_env: RELAY_PROVIDER_API_KEY
+    status: pending
+    capabilities: [chat]
+    notes: "占位，按需启用。"
+
+placeholder_providers: []
+
+# ── Runtime → Provider 映射（逻辑，不含密钥/域名）──
+runtime_provider_routing:
+  runtime-a:
+    primary:  { provider: provider-a,       model_env: RUNTIME_A_PRIMARY_MODEL }
+    fallback: { provider: provider-b,       model_env: RUNTIME_A_FALLBACK_MODEL }
+  runtime-b:
+    primary:  { provider: official-provider, model_env: RUNTIME_B_PRIMARY_MODEL }

@@ -1,0 +1,1 @@
+RESUME_OK same_task=T-202 ... + STOP: HANDOFF_STALE (branch mismatch)

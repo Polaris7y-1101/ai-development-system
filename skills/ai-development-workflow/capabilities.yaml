@@ -1,0 +1,148 @@
+# ============================================================
+# WORKFLOW_CAPABILITIES — AI Development Workflow v0.1 Capability Index
+# 位置: <runtime-home>/skills/ai-development-workflow/capabilities.yaml
+# 规则: 只索引真实存在的能力（Reality 优先）；status 不得虚报。
+#   VERIFIED_EXISTING = 独立 skill 实存（<runtime-home>/skills/...）
+#   EXTERNAL_BUILTIN  = Hermes 内置目录实存（只引用，禁止复制/修改）
+#   PARTIAL           = 无独立 skill，由既有文件承载逻辑
+#   DRAFT             = 仅文档级逻辑，未 VERIFIED
+#   MISSING           = 不存在（勿创建假实现）
+# ============================================================
+
+version: 1
+kind: workflow_capability_index
+
+categories:
+
+  task:
+    - capability_id: requirement-to-task
+      implementation_path: <runtime-home>/skills/software-development/requirement-to-task/
+      status: VERIFIED_EXISTING
+      alias: []
+      notes: "需求→任务定义"
+    - capability_id: task-state-management
+      implementation_path: <runtime-home>/legion/protocols/task-lifecycle.md
+      status: PARTIAL
+      alias: [STATUS_MODEL]
+      notes: "STATUS_MODEL 权威载体；不新增模糊状态"
+
+  reality:
+    - capability_id: repo-reality-check
+      implementation_path: <runtime-home>/skills/software-development/repo-reality-check/
+      status: VERIFIED_EXISTING
+      alias: []
+      notes: "真实源码/Git > Handoff > PROJECT_STATE > 历史文档"
+    - capability_id: state-drift-detection
+      implementation_path: <runtime-home>/skills/software-development/repo-reality-check/
+      status: PARTIAL
+      alias: [STATE_DRIFT]
+      notes: "IMPLEMENTATION_SOURCE=repo-reality-check 内部规则；严重度 NONE/INFORMATIONAL/TASK_RELEVANT/CRITICAL/UNRESOLVED"
+
+  git:
+    - capability_id: git-worktree-manager
+      implementation_path: <runtime-home>/skills/software-development/git-worktree-manager/
+      status: VERIFIED_EXISTING
+      alias: []
+      notes: "Worktree Ownership 权威（MIG-002）；四类 Switch ≠ New Worktree"
+
+  routing:
+    - capability_id: coding-agent-router
+      implementation_path: <runtime-home>/skills/autonomous-ai-agents/coding-agent-router/
+      status: VERIFIED_EXISTING
+      alias: []
+      notes: "Task/Role → Coding Runtime"
+    - capability_id: model-router
+      implementation_path: <runtime-home>/legion/model-registry.yaml
+      status: PARTIAL
+      alias: []
+      notes: "无独立 skill；逻辑载体=model-registry + 宿主 Router。勿伪装已实现"
+    - capability_id: relay-provider-router
+      implementation_path: <runtime-home>/skills/autonomous-ai-agents/relay-provider-router/
+      status: VERIFIED_EXISTING
+      alias: []
+      notes: "Provider/Relay 选择"
+    - capability_id: relay-health-check
+      implementation_path: <runtime-home>/skills/autonomous-ai-agents/relay-health-check/
+      status: VERIFIED_EXISTING
+      alias: []
+      notes: "GET /models 探活"
+
+  development:
+    - capability_id: backend-development
+      implementation_path: <runtime-home>/skills/software-development/backend-development/
+      status: VERIFIED_EXISTING
+    - capability_id: frontend-development
+      implementation_path: <runtime-home>/skills/software-development/frontend-development/
+      status: VERIFIED_EXISTING
+    - capability_id: api-contract
+      implementation_path: <runtime-home>/skills/software-development/api-contract/
+      status: VERIFIED_EXISTING
+    - capability_id: database-migration
+      implementation_path: <runtime-home>/skills/software-development/database-migration/
+      status: VERIFIED_EXISTING
+
+  gates:
+    - capability_id: code-review-gate
+      implementation_path: <runtime-home>/hermes-agent/skills/software-development/requesting-code-review/
+      status: EXTERNAL_BUILTIN
+      alias: [requesting-code-review]
+      notes: "CANONICAL=code-review-gate；alias→requesting-code-review（Hermes 内置，EXTERNAL_BUILTIN_REFERENCE：只引用不复制不修改）；备用实现源 github-code-review（builtin:github）。独立性规则权威=legion/workflow.md 规则7（BASIC-001）"
+    - capability_id: automated-test-gate
+      implementation_path: <runtime-home>/hermes-agent/skills/software-development/test-driven-development/
+      status: PARTIAL
+      alias: []
+      notes: "载体=TDD skill（EXTERNAL_BUILTIN）+ workflow.md 自动验证节；无独立 gate skill"
+    - capability_id: qa-gate
+      implementation_path: <runtime-home>/legion/roles/05-yuheng-qa.md
+      status: PARTIAL
+      alias: []
+      notes: "QA != Developer；QA Failed→Fix→Review→QA Regression；载体=玉衡 role + workflow.md"
+    - capability_id: security-secrets-gate
+      implementation_path: <runtime-home>/skills/software-development/security-secrets-gate/
+      status: VERIFIED_EXISTING
+    - capability_id: scope-gate
+      implementation_path: <runtime-home>/legion/protocols/task-lifecycle.md
+      status: PARTIAL
+      notes: "白名单机制载体"
+    - capability_id: human-acceptance-preparation
+      implementation_path: <runtime-home>/legion/protocols/task-lifecycle.md
+      status: PARTIAL
+      notes: "AI 只准备验收材料；AI 不拥有 human-acceptance / human-approval；受保护动作引用 legion/safety-boundary.md"
+
+  memory:
+    - capability_id: session-checkpoint
+      implementation_path: <runtime-home>/skills/software-development/session-checkpoint/
+      status: VERIFIED_EXISTING
+    - capability_id: handoff-state-sync
+      implementation_path: <runtime-home>/skills/software-development/handoff-state-sync/
+      status: VERIFIED_EXISTING
+    - capability_id: session-resume
+      implementation_path: <runtime-home>/skills/software-development/session-resume/
+      status: VERIFIED_EXISTING
+      notes: "已验证 Cross-AI 流程 Hermes→Codex→Hermes"
+    - capability_id: project-memory-bootstrap
+      implementation_path: <runtime-home>/skills/software-development/agent-team-governance/
+      status: DRAFT
+      notes: "仅文档级逻辑（sdd 文档），未 VERIFIED；勿虚报"
+    - capability_id: project-memory-audit
+      implementation_path: <runtime-home>/skills/software-development/agent-team-governance/
+      status: DRAFT
+      notes: "同上"
+
+  release:
+    - capability_id: release-rollback
+      implementation_path: <runtime-home>/skills/software-development/release-rollback/
+      status: VERIFIED_EXISTING
+    - capability_id: release-preparation
+      implementation_path: ''
+      status: MISSING
+      notes: "PLANNED；build/health/smoke 检查当前无独立承载"
+
+# ── 变更分类记录（Batch 4，§40）──
+change_classification:
+  KEEP_AND_INDEX: [repo-reality-check, git-worktree-manager, session-checkpoint, session-resume, handoff-state-sync, coding-agent-router, relay-provider-router, relay-health-check, backend-development, frontend-development, api-contract, database-migration, requirement-to-task, security-secrets-gate, release-rollback]
+  EXTERNAL_BUILTIN_REFERENCE: [requesting-code-review, test-driven-development, github-code-review]
+  CREATE_INDEX_ONLY: [model-router, state-drift-detection, qa-gate, scope-gate, automated-test-gate, human-acceptance-preparation, task-state-management]
+  DRAFT: [project-memory-bootstrap, project-memory-audit]
+  MISSING: [release-preparation]
+  DELETE: []   # 本批禁止 DELETE

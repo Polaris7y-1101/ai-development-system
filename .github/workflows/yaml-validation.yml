@@ -1,0 +1,14 @@
+# STATUS: LOCALLY_VALIDATED / NOT_YET_GITHUB_EXECUTED
+name: yaml-validation
+on: [push]
+permissions:
+  contents: read
+
+jobs:
+  yaml:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: python3 -c "import yaml,glob,sys;[yaml.safe_load(open(f)) for f in glob.glob('**/*.yaml',recursive=True)];print('yaml ok')"

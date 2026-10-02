@@ -1,0 +1,1 @@
+== 1..8 stages; final line: 8 CLOSED State: CLOSED; violation path last line: BLOCKED: REVIEW_INDEPENDENCE_MISSING
