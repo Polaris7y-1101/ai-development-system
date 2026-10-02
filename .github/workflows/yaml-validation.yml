@@ -11,4 +11,5 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: {python-version: '3.11'}
-      - run: python3 -c "import yaml,glob,sys;[yaml.safe_load(open(f)) for f in glob.glob('**/*.yaml',recursive=True)];print('yaml ok')"
+      - run: python3 -m pip install --disable-pip-version-check PyYAML==6.0.2
+      - run: python3 -c "import yaml,glob,sys;fs=sorted(set(glob.glob('**/*.yaml',recursive=True)+glob.glob('**/*.yml',recursive=True)));[yaml.safe_load(open(f)) for f in fs];print('yaml ok',len(fs),'files')"
