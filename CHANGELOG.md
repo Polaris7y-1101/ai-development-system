@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.1.1
+
+Compatible maintenance release.
+
+### Fixed
+
+- Corrected both top-level Skill license metadata from `MIT` to `Apache-2.0` to match the repository license.
+- Corrected the test-suite description from `T1-T10` to `T1-T11`.
+
 ## v0.1.0
 First public release of ai-development-system.
 
