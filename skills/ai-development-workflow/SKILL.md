@@ -2,7 +2,7 @@
 name: ai-development-workflow
 description: AI Development Workflow v0.1 顶层标准入口（HOW）——标准开发流 14 步、Gate/路由/记忆/发布能力索引、Cross-AI 连续性（checkpoint/handoff/resume）、独立 Review 与 QA 规则引用。当用户提到 开发工作流/task lifecycle/repo reality/worktree/gate/QA/handoff/resume/发布回滚 时使用。Legion（WHO）见 ai-software-legion skill。
 version: 1.0.0
-license: MIT
+license: Apache-2.0
 ---
 
 # AI Development Workflow v0.1 — 顶层标准入口（HOW）

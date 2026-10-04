@@ -2,7 +2,7 @@
 name: ai-software-legion
 description: AI Software Legion v0.1 顶层标准入口——军团结构导航、北斗(Beidou) Preset 说明、Custom Legion 组建与 Role 契约/公开 Provider 注册表模板。当用户提到 军团/legion/北斗编制/组建AI开发团队/Role契约/provider注册表模板 时使用。
 version: 1.0.0
-license: MIT
+license: Apache-2.0
 ---
 
 # AI Software Legion v0.1 — 顶层标准入口（Shell）

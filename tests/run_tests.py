@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""ai-development-system — public deterministic test suite (T1-T10).
+"""ai-development-system — public deterministic test suite (T1-T11).
 Offline, no LLM, no network, no provider. Run: python3 tests/run_tests.py"""
 import os, re, sys, subprocess, tempfile, shutil, json
 
