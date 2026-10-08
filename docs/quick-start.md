@@ -1,14 +1,19 @@
 # Quick Start（快速开始）
 
-> 面向所有用户——不假定你会编程。全程约 15 分钟。
+> 开发者预览：建议具备 Git 与运行时配置基础。先完成依赖检查，再进行实际任务；安装入口不等于全部能力可运行。当前范围见[验证状态](verification-status.md)。
 
 ## 你需要什么
 - 一个 Git 仓库（已有的项目即可；不会 Git 就请人帮你 `git init` 一个）
 - 任意一个 AI 编程助手（Hermes / Claude Code / Codex / 其它）
+- 对应宿主中可用的能力实现与配置；本仓库不打包全部外部依赖，也不提供私人凭据
 
 ## 7 步上手
 
-**1. 安装两个 Skill** — 把 `skills/ai-development-workflow/` 与 `skills/ai-software-legion/` 两个目录复制进你 AI 助手的 skills 目录（各助手安装方式不同，通常是 `~/.<runtime>/skills/` 或项目内 `.skills/`）。
+**1. 安装两个 Skill** — 把 `skills/ai-development-workflow/` 与 `skills/ai-software-legion/` 两个目录完整复制进助手支持的 skills 目录。Codex 的项目级目录是 `.agents/skills/`，结果应为 `.agents/skills/ai-development-workflow/SKILL.md` 和 `.agents/skills/ai-software-legion/SKILL.md`。在该项目启动 Codex，使用 `/skills` 查看，或显式调用 `$ai-development-workflow`、`$ai-software-legion`。详见 [Codex adapter](../adapters/codex/README.md)；其他助手按各自安装文档操作。
+
+**依赖检查**：这两个 Skill 是导航入口，不包含全部能力实现。`capabilities.yaml` 中的 `<runtime-home>` 是需要用户配置的路径占位符；先核对本机的实现路径、状态和依赖。能识别两个入口不等于工作流端到端可运行，缺失能力必须明确报告，不能把索引中的历史状态当成本机验证结果。
+
+**安装成功分三层确认**：先确认运行时列出两个入口；再让它读取两个 `SKILL.md` 和 `capabilities.yaml`，报告实际路径及缺项；最后选择一个依赖齐备的小任务，实际执行并保留证据。任一层失败就报告该层的错误，不用后续模拟输出代替通过。跨运行时接力需另行验收。
 
 **2. 初始化项目记忆（Bootstrap）** — 在仓库根建六件套：
 ```

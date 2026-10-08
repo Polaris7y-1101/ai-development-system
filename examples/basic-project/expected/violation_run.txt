@@ -1,1 +1,2 @@
-BLOCKED: REVIEW_INDEPENDENCE_MISSING (developer==reviewer; alternate reviewer required)
+5 INDEPENDENT_REVIEW BLOCKED: REVIEW_INDEPENDENCE_MISSING
+== VIOLATION              State: REVIEW (QA blocked)

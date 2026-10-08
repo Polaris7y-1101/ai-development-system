@@ -1,1 +1,6 @@
-== 1..8 stages; final line: 8 CLOSED State: CLOSED; violation path last line: BLOCKED: REVIEW_INDEPENDENCE_MISSING
+DEMO_DIR=<unique temporary directory>
+Stages 1..8 complete; review, QA and human approval are SIMULATED.
+Normal task: 8 CLOSED State: CLOSED
+transitions.log: PLANNED -> READY_FOR_IMPLEMENTATION -> IN_PROGRESS -> REVIEW -> QA -> READY_FOR_HUMAN_ACCEPTANCE -> CLOSED
+Violation gate: BLOCKED: REVIEW_INDEPENDENCE_MISSING
+Violation task: State: REVIEW (QA blocked)
