@@ -32,3 +32,8 @@ OpenAI Codex CLI 形态运行时；历史上作为实现者/接手方参与过�
 
 ## Verification Status
 **DRAFT** — adapter/协议层已在真实项目历史验证（任务接力、git 现实复核、身份不变量）；**当前本地 provider 可用性属环境特定**，发布时点的完整端到端重验未执行。表述区分：protocol validated historically ≠ currently fully verified end-to-end.
+
+2026-10-09 补充：ADS-LIVE-001 已完成人工验收，覆盖同一任务通过
+Codex 宿主工具＋WSL 与 Hermes 双向接力（基线 `a85a2b1`）。这不包含原生
+Windows 沙箱加载修复、全新账户安装或 26 项能力逐项执行；**DRAFT 保持不变**。
+详见[验证范围](../../docs/verification-status.md)及[能力验收表](../../docs/capability-acceptance.md)。
