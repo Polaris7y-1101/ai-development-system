@@ -3,7 +3,9 @@
 > **Git-first, cross-agent project continuity and AI software development orchestration.**
 > A configurable AI software legion system where the project's Git repository — not any AI's chat history — is the single source of engineering truth.
 
-**Status: v0.1.0 — early public development.** Derived and validated through real multi-runtime software development workflows.
+**Status: developer preview.** Intended for technical users who can configure runtime dependencies and inspect Git state. The two skills are reference wrappers; copying them does not install all capability implementations or provide a fully verified, ready-to-run system.
+
+Start with the [installation guide](docs/quick-start.md) and [verification status and limitations](docs/verification-status.md). Historical project validation does not establish fresh-install or cross-runtime readiness for this revision. Pending changes are listed in the [changelog](CHANGELOG.md); use [Releases](https://github.com/Polaris7y-1101/ai-development-system/releases) for published versions.
 
 ---
 
@@ -91,7 +93,7 @@ Nine roles out of the box (orchestrator, product validation, architect, backend,
 
 ## 13. Quick Start
 
-See `docs/quick-start.md` — copy two skills, bootstrap six truth files, pick a legion, create your first CURRENT_TASK, verify git reality. No programming knowledge assumed.
+See the [quick start](docs/quick-start.md): install the two entry points, check external dependencies, bootstrap project truth, and verify Git reality before running a task. Familiarity with Git and your runtime configuration is recommended.
 
 ## 14. Examples
 
@@ -101,11 +103,11 @@ Four deterministic, self-contained demos (offline, no API keys): `examples/basic
 
 | Adapter | Verification status |
 |---|---|
-| Hermes | **VERIFIED** (validated end-to-end in real projects, incl. in-gateway delegation) |
-| Claude Code | **VERIFIED** (cross-AI round-trip validated; remains unaffected by provider changes) |
-| Codex | **DRAFT** — adapter/protocol validated historically; current local provider availability is environment-specific |
+| Hermes | Historical project validation reported; this revision's fresh-install and live round-trip checks remain pending |
+| Claude Code | Historical cross-AI validation reported; no fresh end-to-end run for this revision |
+| Codex | **DRAFT** — repository skill discovery passed; file-reading smoke test blocked by a local sandbox helper failure; capability execution unverified |
 
-Details & integration contracts: `adapters/*/README.md`.
+Details & integration contracts: `adapters/*/README.md`. Their historical status labels are scoped by the [current verification matrix](docs/verification-status.md).
 
 ## 16. Obsidian Integration
 
@@ -122,8 +124,10 @@ Start from any preset (or none), define roles + `required_coverage`, and the sys
 ## 19. Current v0.1 Limitations
 
 - Adapter docs describe contracts; runtime-specific tooling beyond skills is not bundled
-- CI workflows validated on GitHub Actions: tests / boundary-scan / yaml-validation all PASS (see `.github/README.md`)
-- Codex adapter end-to-end run depends on a working provider configured by you
+- Current local checks: 13/13 tests, four offline demos, and ten YAML files passed. Live review, QA, and human approval are not exercised by those simulations.
+- Check the current commit's GitHub Actions results separately; historical CI success is not a result for a new commit.
+- Capability execution requires configured external implementations and a working runtime. The latest local Codex file-reading probe was blocked, and the live Hermes/Codex round trip remains pending.
+- Existing scanner classifications and differing lifecycle vocabularies remain limitations; see the [verification matrix](docs/verification-status.md).
 
 ## 20. Roadmap
 

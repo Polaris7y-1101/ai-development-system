@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""ai-development-system — public deterministic test suite (T1-T11).
+"""ai-development-system — public deterministic test suite (T1-T13).
 Offline, no LLM, no network, no provider. Run: python3 tests/run_tests.py"""
 import os, re, sys, subprocess, tempfile, shutil, json
 
@@ -169,8 +169,6 @@ def classify_fp(rel, lineno, cat, mtext, line_text):
         return "SCANNER_RULE_LITERAL (hit is this scanner's own rule definition)"
     if rel == "tests/run_tests.py" and _T11_START <= lineno <= _T11_END:
         return "SCANNER_SELFTEST_FIXTURE (synthetic fake data exercising the scanner)"
-    if re.search(r'<[a-z-]+>', line_text):
-        return "ANGLE_PLACEHOLDER (documentation placeholder line)"
     return None
 
 def scan_tree(base):
@@ -266,6 +264,55 @@ def t10():
                 if tgt not in on_disk: dangling.append(f"{rel} -> {m}")
     assert not dangling, f"broken refs: {dangling[:5]}"
 check("T10","internal references (broken reference = 0)", t10)
+
+# ── T12 Placeholder adjacency must not hide a secret ──
+def t12():
+    token = "gh" + "p_" + "FakeOnly1234567890123456"
+    paths = ["root.txt", "tests/nested/sample.txt", "docs/sample.md",
+             "examples/nested/sample.txt", ".github/sample.txt"]
+    cases = [(token, 1), ("<runtime-home> " + token, 1),
+             (token + " <runtime-home>", 1), ("<runtime-home>\n" + token, 2)]
+    for rel in paths:
+        for content, line in cases:
+            with tempfile.TemporaryDirectory() as td:
+                path = os.path.join(td, rel)
+                os.makedirs(os.path.dirname(path), exist_ok=True)
+                with open(path, "w", encoding="utf-8") as f:
+                    f.write(content + "\n")
+                raw, classified, confirmed = scan_tree(td)
+                expected = ("SECRET_KEY", os.path.normpath(rel), line, token)
+                assert raw == [expected], f"unexpected raw hits: {rel}:{line}"
+                assert not classified, f"secret suppressed by placeholder: {rel}:{line}"
+                assert confirmed == [expected + (None,)], f"secret not confirmed: {rel}:{line}"
+    with tempfile.TemporaryDirectory() as td:
+        with open(os.path.join(td, "benign.txt"), "w", encoding="utf-8") as f:
+            f.write("<runtime-home>\napi.example.com\n203.0.113.10\n")
+        assert not scan_tree(td)[2], "benign documentation flagged"
+check("T12", "placeholder adjacency (20 exact detections + benign controls)", t12)
+
+# ── T13 D1 lifecycle artifacts and blocked review ──
+def t13():
+    with tempfile.TemporaryDirectory() as td:
+        env = dict(os.environ, TMPDIR=td)
+        result = subprocess.run(["bash", os.path.join(ROOT, "examples/basic-project/run_demo.sh")],
+                                capture_output=True, text=True, env=env, timeout=30)
+        assert result.returncode == 0, result.stderr
+        assert re.search(r"8 CLOSED\s+State: CLOSED", result.stdout), "D1 reports CLOSED without closing its task"
+        match = re.search(r"^DEMO_DIR=(.+)$", result.stdout, re.M)
+        assert match, "D1 must expose its generated artifacts"
+        demo = match.group(1)
+        assert os.path.commonpath([td, demo]) == td, "demo escaped TMPDIR"
+        def state(path):
+            with open(os.path.join(demo, path), encoding="utf-8") as f:
+                return re.findall(r"^State: (\w+)$", f.read(), re.M)
+        assert state("CURRENT_TASK.md") == ["CLOSED"], "normal artifact not CLOSED"
+        assert state("violation/CURRENT_TASK.md") == ["REVIEW"], "self-review entered QA or CLOSED"
+        with open(os.path.join(demo, "transitions.log"), encoding="utf-8") as f:
+            assert f.read().splitlines() == ["PLANNED", "READY_FOR_IMPLEMENTATION", "IN_PROGRESS",
+                                            "REVIEW", "QA", "READY_FOR_HUMAN_ACCEPTANCE", "CLOSED"]
+        assert "BLOCKED: REVIEW_INDEPENDENCE_MISSING" in result.stdout
+        assert "SIMULATED" in result.stdout, "offline approvals must be labeled simulated"
+check("T13", "D1 actual lifecycle states and rejected self-review", t13)
 
 # ── summary ──
 fails=[r for r in RESULTS if r[2]=="FAIL"]

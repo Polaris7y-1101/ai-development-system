@@ -11,6 +11,22 @@ OpenAI Codex CLI 形态运行时；历史上作为实现者/接手方参与过�
 ## Shared Truth Behavior
 同上——六件套 + Git 唯一权威。
 
+## 项目级安装与核验
+将两个完整 Skill 目录复制至目标项目的 `.agents/skills/`：
+
+```text
+.agents/skills/ai-development-workflow/SKILL.md
+.agents/skills/ai-software-legion/SKILL.md
+```
+
+在该项目打开 Codex，用 `/skills` 查看两个名称，再分别显式调用
+`$ai-development-workflow` 和 `$ai-software-legion`，要求读取入口及能力索引，
+报告缺失依赖。安装目录与调用方式参见 [Codex 官方说明](https://developers.openai.com/codex/skills/)。
+
+发现入口、读取正文、执行能力和跨运行时接力是不同的验证层次。
+本项目中的 `<runtime-home>` 不会自动解析；复制两个入口也不会安装它们引用的
+外部能力、军团实体或私有注册表。应由宿主环境提供并逐项验证，不能自动复制私人配置。
+
 ## Known Limitations
 - 端到端可用性取决于用户配置的 provider 当前是否可用（协议层与 provider 层分离，见 `protocols/provider-error-handling.md`）
 
