@@ -1,13 +1,15 @@
 # AI Development System（AI 开发系统）
 
-**独立本地交接候选包：** [四项工作规范技术预览](docs/technical-preview.zh-CN.md)位于 `previews/`，包含独立的两个 Skill 目录。用于隔离测试项目，与根目录引用包分开安装，不代表新的正式 Release。
+**第一次来？先看 [中文新手试用指南](docs/technical-preview.zh-CN.md) · [English guide](docs/technical-preview.md)。** 从下载、安装到第一个小任务和换对话接手，分步操作并核对结果。需要已有能读写本地文件、执行命令的 AI 助手；指南会帮助检查 Git 和 Python 环境。
+
+独立试用包位于 `previews/`：用四项工作规范帮 AI 保存进度、核对交接，包含两个完整 Skill 目录。请先用新的练习项目；它与下面介绍的完整系统引用包分开安装，不代表新的正式 Release。
 
 > **Git-first、支持跨 AI 接力的项目连续性与 AI 软件开发编排系统。**
 > 核心信念：工程的唯一事实源是 Git 仓库——不是任何 AI 的聊天记录。
 
 **状态：开发者预览版。** 面向能配置运行时依赖、检查 Git 状态的技术用户。两个 Skill 是引用入口，复制目录不会安装全部能力实现，也不代表获得已完整验证、开箱即用的系统。
 
-试用前请阅读[安装指南](docs/quick-start.md)与[验证状态和限制](docs/verification-status.md)。历史项目验证不等于当前修订的干净安装或跨运行时验收。待发布改动见 [CHANGELOG](CHANGELOG.md)，已发布版本见 [Releases](https://github.com/Polaris7y-1101/ai-development-system/releases)。
+以下介绍完整系统；首次小范围试用请走上面的新手指南。完整引用包的技术用户请阅读[安装指南](docs/quick-start.md)与[验证状态和限制](docs/verification-status.md)。历史项目验证不等于当前修订的干净安装或跨运行时验收。待发布改动见 [CHANGELOG](CHANGELOG.md)，已发布版本见 [Releases](https://github.com/Polaris7y-1101/ai-development-system/releases)。
 
 ## 这是什么？
 
