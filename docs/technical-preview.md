@@ -1,6 +1,6 @@
 # Beginner trial guide: help an AI pick up work in a new chat
 
-[中文指南](technical-preview.zh-CN.md) · [Back to the home page](../README.md)
+[中文指南](technical-preview.zh-CN.md) · [Back to the English home page](../README.en.md)
 
 **This package helps your AI record progress, test results, and next steps in project files.** A new chat checks those records against the actual project before deciding whether it can continue. You spend less time explaining the same background again.
 

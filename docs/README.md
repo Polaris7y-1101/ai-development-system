@@ -19,4 +19,4 @@ These documents describe the broader system, not the small trial package. 以下
 - [Project memory / 项目记忆](project-memory.md)
 - [State drift / 状态漂移](state-drift.md)
 - [Safety boundary / 安全边界](safety-boundary.md)
-- [Back to home / 返回首页](../README.md) · [中文首页](../README.zh-CN.md)
+- [中文首页 / Chinese home](../README.md) · [English home](../README.en.md)
