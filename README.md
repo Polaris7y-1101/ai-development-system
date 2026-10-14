@@ -1,11 +1,15 @@
 # AI Development System
 
+**New here? Start with the [English beginner trial guide](docs/technical-preview.md) · [中文新手指南](docs/technical-preview.zh-CN.md).** Follow download, installation, a first small task, and a handoff to a new chat, with results to check at each step. You need an existing AI assistant that can read and write local files and run commands; the guide helps check Git and Python.
+
+The separate trial package under `previews/` contains four local procedures in two complete Skill directories to help your AI record progress and check handoffs. Use a new practice project first. It is installed separately from the broader reference package described below and is not a new formal Release.
+
 > **Git-first, cross-agent project continuity and AI software development orchestration.**
 > A configurable AI software legion system where the project's Git repository — not any AI's chat history — is the single source of engineering truth.
 
 **Status: developer preview.** Intended for technical users who can configure runtime dependencies and inspect Git state. The two skills are reference wrappers; copying them does not install all capability implementations or provide a fully verified, ready-to-run system.
 
-Start with the [installation guide](docs/quick-start.md) and [verification status and limitations](docs/verification-status.md). Historical project validation does not establish fresh-install or cross-runtime readiness for this revision. Pending changes are listed in the [changelog](CHANGELOG.md); use [Releases](https://github.com/Polaris7y-1101/ai-development-system/releases) for published versions.
+The sections below describe the broader system; use the beginner guide above for a first small trial. Technical users of the broader reference package should read the [installation guide](docs/quick-start.md) and [verification status and limitations](docs/verification-status.md). Historical project validation does not establish fresh-install or cross-runtime readiness for this revision. Pending changes are listed in the [changelog](CHANGELOG.md); use [Releases](https://github.com/Polaris7y-1101/ai-development-system/releases) for published versions.
 
 ---
 

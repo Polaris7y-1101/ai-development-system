@@ -12,6 +12,8 @@ Developer preview maintenance; no new release is implied by this section.
 
 ### Added
 
+- Added an isolated `local-continuity-candidate-1` preview (four local procedures, two Skill directories), frozen archive/checksums, bilingual trial guides and scoped evidence summary. Root skills and formal Releases are unchanged. See [technical preview](docs/technical-preview.md).
+- Expanded the English and Chinese trial guides with a Codex project installation example, copyable setup/task/resume prompts, expected results, troubleshooting, and clear first-time-user links. This documentation review does not establish fresh-install or beginner-user acceptance.
 - T12: 20 exact scanner regression cases with benign controls; T13: generated lifecycle artifacts and blocked self-review checks.
 - Bilingual preview notices and a dated verification matrix explaining external dependencies and remaining runtime checks.
 
