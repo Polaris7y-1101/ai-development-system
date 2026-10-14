@@ -1,0 +1,10 @@
+{
+  "profile": "local-continuity-candidate-1",
+  "scope": "Local Git only; instructions executed by the selected AI runtime",
+  "capabilities": [
+    {"id": "repo-reality-check", "implementation_path": "references/repo-reality-check.md", "status": "BUNDLED_CANDIDATE"},
+    {"id": "handoff-state-sync", "implementation_path": "references/handoff-state-sync.md", "status": "BUNDLED_CANDIDATE"},
+    {"id": "session-checkpoint", "implementation_path": "references/session-checkpoint.md", "status": "BUNDLED_CANDIDATE"},
+    {"id": "session-resume", "implementation_path": "references/session-resume.md", "status": "BUNDLED_CANDIDATE"}
+  ]
+}

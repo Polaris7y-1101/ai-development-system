@@ -1,5 +1,7 @@
 # AI Development System
 
+**Separate local continuity candidate:** a [four-procedure technical preview](docs/technical-preview.md) is available under `previews/`, with its own two Skill directories. It is for isolated test projects, does not replace the root reference package, and is not a new formal Release.
+
 > **Git-first, cross-agent project continuity and AI software development orchestration.**
 > A configurable AI software legion system where the project's Git repository — not any AI's chat history — is the single source of engineering truth.
 

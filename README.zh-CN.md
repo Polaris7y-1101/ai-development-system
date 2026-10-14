@@ -1,5 +1,7 @@
 # AI Development System（AI 开发系统）
 
+**独立本地交接候选包：** [四项工作规范技术预览](docs/technical-preview.zh-CN.md)位于 `previews/`，包含独立的两个 Skill 目录。用于隔离测试项目，与根目录引用包分开安装，不代表新的正式 Release。
+
 > **Git-first、支持跨 AI 接力的项目连续性与 AI 软件开发编排系统。**
 > 核心信念：工程的唯一事实源是 Git 仓库——不是任何 AI 的聊天记录。
 
